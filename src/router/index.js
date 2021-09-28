@@ -4,20 +4,34 @@ import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
-const routes = [
+export const routes = [
   {
     path: "/",
     name: "Home",
     component: Home,
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    path: "/accordeon",
+    name: "Accordeon",
+    component: () => import("../views/Accordeon.vue"),
+  },
+  {
+    path: "/floating-label",
+    name: "FloatingLabel",
+    component: () => import("../views/FloatingLabel.vue"),
+  },
+  {
+    path: "/forbidden",
+    name: "Forbidden",
+    component: () => import("../views/Forbidden.vue"),
+    beforeEnter: (next) => {
+      next({ name: "Home" });
+    },
+  },
+  {
+    path: "**",
+    name: "NotFound",
+    component: () => import("../views/NotFound.vue"),
   },
 ];
 
