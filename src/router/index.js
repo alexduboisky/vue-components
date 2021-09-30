@@ -13,7 +13,7 @@ export const routes = [
   {
     path: "/accordeon",
     name: "Accordeon",
-    component: () => import("../views/Accordeon.vue"),
+    component: () => import("../views/Accordion.vue"),
   },
   {
     path: "/floating-label",
@@ -24,7 +24,7 @@ export const routes = [
     path: "/forbidden",
     name: "Forbidden",
     component: () => import("../views/Forbidden.vue"),
-    beforeEnter: (next) => {
+    beforeEnter: (to, from, next) => {
       next({ name: "Home" });
     },
   },
