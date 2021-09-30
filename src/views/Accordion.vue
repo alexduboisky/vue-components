@@ -6,23 +6,25 @@
       @active-section-change="onActiveSectionChange"
     >
       <template>
-        <Section v-bind="{ title: 'Section1', activeSectionIds }">
+        <Section v-bind="{ title: 'Section1', id: 'Info' }">
           <template #content>
-            <Info :model="model" />
+            <Info v-bind="{ model: infoModel }" @updateModel="updateModel" />
           </template>
         </Section>
       </template>
 
       <template>
-        <Section v-bind="{ title: 'Section2', activeSectionIds }">
+        <Section v-bind="{ title: 'Section2', id: 'Settings' }">
           <template #content>
-            <Settings :model="model" />
+            <Settings
+              v-bind="{ model: settingsModel }"
+              @updateModel="updateModel"
+            />
           </template>
         </Section>
       </template>
     </Sections>
-
-    <pre class="mt-5">
+    <pre>
       {{ model }}
     </pre>
   </div>
@@ -36,26 +38,37 @@ export default {
   components: { Info, Settings, Section, Sections },
   data: () => ({
     model: {
-      type: Object,
-      default: () => ({
-        email: null,
-        select: null,
-        textarea: null,
-        field1: null,
-        field2: null,
-        field3: null,
-        field4: null,
-      }),
+      email: "test",
+      select: 3,
+      textarea: "test",
+      field1: "test",
+      field2: "test",
+      field3: "test",
+      field4: "test",
     },
     activeSectionIds: [],
   }),
   computed: {
-    infoModel: () => ({}),
-    settingsModel: () => ({}),
+    infoModel: ({ model }) => {
+      return {
+        email: model.email,
+        select: model.select,
+        textarea: model.textarea,
+      };
+    },
+    settingsModel: ({ model }) => ({
+      field1: model.field1,
+      field2: model.field2,
+      field3: model.field3,
+      field4: model.field4,
+    }),
   },
   methods: {
     onActiveSectionChange(data) {
       this.activeSectionIds = data;
+    },
+    updateModel(data) {
+      this.model = { ...this.model, ...data };
     },
   },
 };

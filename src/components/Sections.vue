@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       Sections: {
-        count: null,
+        activeSectionIds: () => this.activeSectionIds,
         toggle: (id) => this.toggle(id),
       },
     };

@@ -41,5 +41,8 @@ export default {
   props: {
     model: { type: Object, default: () => ({}) },
   },
+  destroyed() {
+    this.$emit("updateModel", this.model);
+  },
 };
 </script>

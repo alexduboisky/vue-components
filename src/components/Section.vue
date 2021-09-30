@@ -1,6 +1,6 @@
 <template>
   <div class="accordeon-container">
-    <div class="accordeon-header" @click="toggle">
+    <div class="accordeon-header" @click="onClick">
       <slot name="header" />
       <span v-if="!$slots.header">
         {{ title }}
@@ -16,22 +16,18 @@
 export default {
   props: {
     title: { type: String },
-    activeSectionIds: { type: Array },
+    id: { type: String },
   },
-  data: () => ({
-    id: null,
-  }),
   inject: ["Sections"],
   computed: {
+    activeSectionIds: ({ Sections }) => Sections.activeSectionIds(),
     expanded: ({ activeSectionIds, id }) => activeSectionIds.includes(id),
   },
   methods: {
-    toggle() {
+    onClick() {
+      this.$emit("click", this.id);
       this.Sections.toggle(this.id);
     },
-  },
-  created() {
-    this.id = this.Sections.count++;
   },
 };
 </script>
