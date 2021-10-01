@@ -1,12 +1,12 @@
 <template>
-  <div class="accordeon-container">
-    <div class="accordeon-header" @click="onClick">
+  <div class="accordion-container">
+    <div class="accordion-header" @click="onClick">
       <slot name="header" />
       <span v-if="!$slots.header">
         {{ title }}
       </span>
     </div>
-    <div v-if="expanded" class="accordeon-content">
+    <div v-if="expanded" class="accordion-content">
       <slot name="content" />
     </div>
   </div>

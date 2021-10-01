@@ -11,8 +11,8 @@ export const routes = [
     component: Home,
   },
   {
-    path: "/accordeon",
-    name: "Accordeon",
+    path: "/accordion",
+    name: "Accordion",
     component: () => import("../views/Accordion.vue"),
   },
   {
